@@ -31,7 +31,7 @@ const Course = ({ match, history }) => {
     }
 
     const save = () => {
-        course._id = undefined;
+        course._id = undefined
         if (id === '0') {
             insert('courses', course, data => {
                 if (data) return history.push('/courses');

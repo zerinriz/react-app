@@ -19,8 +19,10 @@ const Students = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Student Name</th>
-                        <th>Points</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Year of Birth</th>
+                        <th>Adress</th>
                         <td>
                             <Link to='/students/0'>Add new</Link>
                         </td>
@@ -29,8 +31,10 @@ const Students = () => {
                 <tbody>
                     {students.map(c => (
                         <tr key={c._id}>
-                            <td>{c.name}</td>
-                            <td>{c.points}</td>
+                            <td>{c.firstName}</td>
+                            <td>{c.lastName}</td>
+                            <td>{c.yearOfBirth}</td>
+                            <td>{c.address}</td>
                             <td>
                                 <Link to={`/students/${c._id}`}>Edit</Link>
                             </td>

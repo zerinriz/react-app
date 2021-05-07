@@ -6,8 +6,10 @@ const Student = ({ match, history }) => {
     const [id] = useState(match.params.id);
     const [student, setStudent] = useState({
         _id: '0',
-        name: '',
-        points: 0
+        firstName: '',
+        lastName: '',
+        yearOfBirth: 0,
+        address: '',
     });
 
     useEffect(() => {
@@ -56,17 +58,31 @@ const Student = ({ match, history }) => {
             <h2>Student</h2>
             <form className='input-form'>
                 <div style={{ margin: '12px 0' }}>
-                    <label htmlFor='name'>Student name: </label>
+                    <label htmlFor='name'>Students first name: </label>
                     <input type='text'
-                        name='name'
-                        value={student.name}
+                        name='firstName'
+                        value={student.firstName}
                         onChange={changeHandler} />
                 </div>
                 <div style={{ margin: '12px 0' }}>
-                    <label htmlFor='points'>Student points: </label>
+                    <label htmlFor='name'>Students last name: </label>
                     <input type='text'
-                        name='points'
-                        value={student.points}
+                        name='lastName'
+                        value={student.lastName}
+                        onChange={changeHandler} />
+                </div>
+                <div style={{ margin: '12px 0' }}>
+                    <label htmlFor='name'>Students year of birth: </label>
+                    <input type='text'
+                        name='yearOfBirth'
+                        value={student.yearOfBirth}
+                        onChange={changeHandler} />
+                </div>
+                <div style={{ margin: '12px 0' }}>
+                    <label htmlFor='name'>Address: </label>
+                    <input type='text'
+                        name='address'
+                        value={student.address}
                         onChange={changeHandler} />
                 </div>
                 <hr />
