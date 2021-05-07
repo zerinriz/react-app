@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { insert, update, read, remove } from '../services/apiService';
 
-const Course = ({ match, history }) => {
+const Student = ({ match, history }) => {
 
     const [id] = useState(match.params.id);
-    const [course, setCourse] = useState({
+    const [student, setStudent] = useState({
         _id: '0',
         name: '',
         points: 0
@@ -12,61 +12,61 @@ const Course = ({ match, history }) => {
 
     useEffect(() => {
         if (id !== '0') {
-            read('courses', id, data => {
-                if (data) setCourse(data);
+            read('students', id, data => {
+                if (data) setStudent(data);
             })
         }
     }, [id]);
 
     function changeHandler(e) {
 
-        setCourse({
-            ...course,
+        setStudent({
+            ...student,
             [e.target.name]: e.target.value
         });
     }
 
     const back = () => {
-        history.push('/courses');
+        history.push('/students');
     }
 
     const save = () => {
-        course._id = undefined;
+        student._id = undefined;
         if (id === '0') {
-            insert('courses', course, data => {
-                if (data) return history.push('/courses');
+            insert('students', student, data => {
+                if (data) return history.push('/students');
                 console.log('There was an error during save data');
             })
         } else {
-            update('course', id, course, data => {
-                if (data) return history.push('/courses');
+            update('student', id, student, data => {
+                if (data) return history.push('/students');
                 console.log('There was an error during save data');
             })
         }
     }
 
     const del = () => {
-        remove('courses', id, data => {
-            history.push('/courses');
+        remove('students', id, data => {
+            history.push('/students');
         })
     }
 
     return (
         <div className='container'>
-            <h2>Course</h2>
+            <h2>Student</h2>
             <form className='input-form'>
                 <div style={{ margin: '12px 0' }}>
-                    <label htmlFor='name'>Course name: </label>
+                    <label htmlFor='name'>Student name: </label>
                     <input type='text'
                         name='name'
-                        value={course.name}
+                        value={student.name}
                         onChange={changeHandler} />
                 </div>
                 <div style={{ margin: '12px 0' }}>
-                    <label htmlFor='points'>Course points: </label>
+                    <label htmlFor='points'>Student points: </label>
                     <input type='text'
                         name='points'
-                        value={course.points}
+                        value={student.points}
                         onChange={changeHandler} />
                 </div>
                 <hr />
@@ -85,4 +85,4 @@ const Course = ({ match, history }) => {
     );
 }
 
-export default Course;
+export default Student;

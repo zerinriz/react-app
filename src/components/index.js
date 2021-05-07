@@ -4,5 +4,7 @@ import Courses from './Courses'
 import Course from './Course'
 import Home from './Home'
 import Students from './Students'
+import Student from './Student'
 
-export { AppFooter, AppHeader, Courses, Home, Students, Course }
+
+export { AppFooter, AppHeader, Courses, Home, Students, Course, Student }
