@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { insert, update, read, remove } from '../services/apiService';
 
 const Course = ({ match, history }) => {
@@ -7,8 +7,9 @@ const Course = ({ match, history }) => {
     const [course, setCourse] = useState({
         _id: '0',
         name: '',
-        points: 0
+        points: 0,
     });
+    const [requiredMessage, setMessage] = useState("")
 
     useEffect(() => {
         if (id !== '0') {
@@ -32,7 +33,10 @@ const Course = ({ match, history }) => {
 
     const save = () => {
         course._id = undefined
-        if (id === '0') {
+        if (!course.name) {
+            setMessage('Field is required')
+        }
+        else if (id === '0') {
             insert('courses', course, data => {
                 if (data) return history.push('/courses');
                 console.log('There was an error during save data');
@@ -61,7 +65,9 @@ const Course = ({ match, history }) => {
                         name='name'
                         value={course.name}
                         onChange={changeHandler} />
+                    <div>{requiredMessage}</div>
                 </div>
+
                 <div style={{ margin: '12px 0' }}>
                     <label htmlFor='points'>Course points: </label>
                     <input type='text'

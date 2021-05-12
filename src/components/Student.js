@@ -11,6 +11,7 @@ const Student = ({ match, history }) => {
         yearOfBirth: 0,
         address: '',
     });
+    const [requiredMessage, setMessage] = useState("")
 
     useEffect(() => {
         if (id !== '0') {
@@ -34,7 +35,10 @@ const Student = ({ match, history }) => {
 
     const save = () => {
         student._id = undefined;
-        if (id === '0') {
+        if (!student.firstName || !student.lastName) {
+            setMessage('Field is required')
+        }
+        else if (id === '0') {
             insert('students', student, data => {
                 if (data) return history.push('/students');
                 console.log('There was an error during save data');
@@ -63,6 +67,7 @@ const Student = ({ match, history }) => {
                         name='firstName'
                         value={student.firstName}
                         onChange={changeHandler} />
+                    <div>{requiredMessage}</div>
                 </div>
                 <div style={{ margin: '12px 0' }}>
                     <label htmlFor='name'>Students last name: </label>
@@ -70,6 +75,7 @@ const Student = ({ match, history }) => {
                         name='lastName'
                         value={student.lastName}
                         onChange={changeHandler} />
+                    <div>{requiredMessage}</div>
                 </div>
                 <div style={{ margin: '12px 0' }}>
                     <label htmlFor='name'>Students year of birth: </label>
